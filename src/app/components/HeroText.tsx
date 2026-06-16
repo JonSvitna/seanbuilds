@@ -9,8 +9,8 @@ export function HeroText() {
 
       <div className="flex flex-col gap-1">
         {["Save Time", "Reduce Headaches", "Solve Real Problems"].map((line) => (
-          <h1 key={line} className="text-white text-5xl xl:text-6xl font-bold leading-tight">
-            {line}<span className="text-blue-500">.</span>
+          <h1 key={line} className="text-white text-5xl xl:text-6xl font-bold leading-tight tracking-tight">
+            {line}
           </h1>
         ))}
       </div>
