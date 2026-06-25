@@ -1,133 +1,186 @@
 import Link from 'next/link'
+import { Lightning, Wrench, Brain, ShieldCheck, ArrowRight } from '@phosphor-icons/react/dist/ssr'
 import Navbar from '../components/Navbar'
+import { SignalGraph } from '../components/SignalGraph'
+import { HorizontalProcess } from '../components/HorizontalProcess'
+import { Reveal, RevealGroup, RevealItem } from '../components/Reveal'
+
+const stats = [
+  { value: '20+', label: 'Projects shipped' },
+  { value: '8+', label: 'Years in security and software' },
+  { value: 'Security + AI', label: 'Background, not a buzzword' },
+  { value: '1,000s', label: 'Of hours spent building' },
+]
+
+const capabilities = [
+  {
+    icon: Lightning,
+    title: 'Automation',
+    body: 'Approvals, reporting, and manual handoffs that run themselves.',
+    span: 'md:col-span-2',
+    tint: 'bg-gradient-to-br from-signal-dim to-transparent',
+  },
+  {
+    icon: Wrench,
+    title: 'Custom Tools',
+    body: 'Internal software built around how your team actually works.',
+  },
+  {
+    icon: Brain,
+    title: 'AI, Used Right',
+    body: "Applied where it earns its place. Not because it's trendy.",
+  },
+  {
+    icon: ShieldCheck,
+    title: 'Compliance & Security',
+    body: 'CMMC-grade thinking applied to your systems, not just your paperwork.',
+    flag: true,
+  },
+]
 
 export default function HomePage() {
   return (
     <>
       <Navbar />
-      <main style={{ backgroundColor: 'var(--bg-primary)', minHeight: '100vh', paddingTop: '80px' }}>
-
+      <main className="bg-void">
         {/* Hero */}
-        <section style={{
-          maxWidth: '1440px', margin: '0 auto', padding: '64px 48px 0',
-          display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '48px', alignItems: 'start',
-        }}>
-          {/* Left */}
-          <div style={{ paddingTop: '64px' }}>
-            <p style={{ fontWeight: 600, fontSize: '15px', color: 'var(--accent-blue)', letterSpacing: '0.05em', marginBottom: '40px' }}>
-              I BUILD SYSTEMS THAT
+        <section className="mx-auto grid max-w-[1400px] grid-cols-1 gap-12 px-6 pt-36 pb-20 md:grid-cols-2 md:items-center md:px-12 md:pt-24">
+          <div>
+            <p className="text-sm font-semibold tracking-[0.08em] text-signal-bright">
+              SYSTEMS FOR SMALL TEAMS
             </p>
-            <h1 style={{ fontWeight: 700, fontSize: '56px', lineHeight: 1.18, color: 'var(--text-white)', marginBottom: '48px' }}>
-              Save time.<br />Reduce headaches.<br />Solve real problems.
+            <h1 className="mt-6 text-5xl font-medium leading-[1.05] tracking-tight text-ink md:text-6xl">
+              Stop clicking.
+              <br />
+              Start shipping.
             </h1>
-            <p style={{ fontWeight: 400, fontSize: '19px', lineHeight: 1.6, color: 'var(--text-muted)', marginBottom: '48px', maxWidth: '520px' }}>
-              From automation to custom applications,<br />I build systems that cut busywork,<br />bring clarity, and give you time back.
+            <p className="mt-6 max-w-[46ch] text-lg leading-relaxed text-ink-dim">
+              I build the automations, internal tools, AI integrations, and compliance
+              systems that get small teams unstuck. Fast.
             </p>
-            <div style={{ display: 'flex', gap: '16px' }}>
-              <Link href="/what-i-build" className="btn-primary">See My Work</Link>
-              <Link href="/faq#contact" className="btn-secondary">Book a Call</Link>
+            <div className="mt-9 flex flex-wrap gap-4">
+              <Link
+                href="/what-i-build"
+                className="flex h-14 items-center gap-2 rounded-pill bg-signal px-7 text-sm font-semibold text-ink transition-colors hover:bg-signal-bright"
+              >
+                See the Work <ArrowRight size={16} weight="bold" />
+              </Link>
+              <Link
+                href="/faq#contact"
+                className="flex h-14 items-center rounded-pill border border-line-bright px-7 text-sm font-semibold text-ink transition-colors hover:border-signal"
+              >
+                Book a Call
+              </Link>
             </div>
           </div>
 
-          {/* Right: Dashboard preview — Vulnaguard card + 3 sub-cards below (matches Figma structure) */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginTop: '32px' }}>
-            {/* Vulnaguard Sentinel panel */}
-            <div style={{
-              backgroundColor: 'var(--bg-secondary)', border: '1px solid var(--border)',
-              borderRadius: 'var(--radius-2xl)', padding: '32px',
-            }}>
-              <p style={{ fontWeight: 600, fontSize: '18px', color: 'var(--text-white)', marginBottom: '24px', letterSpacing: '0.05em' }}>
-                VULNAGUARD SENTINEL
-              </p>
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: '12px', marginBottom: '20px' }}>
-                {[
-                  { label: 'Risk', value: 'High', color: 'var(--text-danger)' },
-                  { label: 'Threats', value: '128', color: 'var(--text-white)' },
-                  { label: 'Active', value: '28', color: 'var(--text-white)' },
-                  { label: 'Score', value: '78%', color: 'var(--text-white)' },
-                ].map((m) => (
-                  <div key={m.label} style={{
-                    backgroundColor: 'var(--bg-card)', border: '1px solid var(--border)',
-                    borderRadius: 'var(--radius-md)', padding: '14px 12px', textAlign: 'center',
-                  }}>
-                    <p style={{ fontSize: '10px', color: 'var(--text-muted)', marginBottom: '6px' }}>{m.label}</p>
-                    <p style={{ fontWeight: 700, fontSize: '25px', color: m.color }}>{m.value}</p>
-                  </div>
-                ))}
-              </div>
-              <div style={{
-                backgroundColor: 'var(--bg-primary)', border: '1px solid var(--border)',
-                borderRadius: 'var(--radius-md)', padding: '16px',
-              }}>
-                <p style={{ fontSize: '11px', color: 'var(--text-muted)', marginBottom: '12px' }}>Risk Trend</p>
-                <div style={{ height: '2px', backgroundColor: 'var(--accent-blue-bright)', borderRadius: '1px' }} />
-              </div>
+          <Reveal delay={0.1}>
+            <div className="h-[360px] overflow-hidden rounded-card border border-line bg-raised md:h-[440px]">
+              <SignalGraph />
             </div>
-
-            {/* 3 sub-cards row */}
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '12px' }}>
-              <div style={{
-                backgroundColor: 'var(--bg-secondary)', border: '1px solid var(--border)',
-                borderRadius: 'var(--radius-xl)', padding: '20px',
-              }}>
-                <p style={{ fontWeight: 600, fontSize: '16px', color: 'var(--text-white)', marginBottom: '12px' }}>AI OS</p>
-                <div style={{ height: '2px', backgroundColor: 'var(--accent-blue-bright)', borderRadius: '1px', width: '60%' }} />
-              </div>
-              <div style={{
-                backgroundColor: 'var(--bg-secondary)', border: '1px solid var(--border)',
-                borderRadius: 'var(--radius-xl)', padding: '20px',
-              }}>
-                <p style={{ fontWeight: 600, fontSize: '18px', color: 'var(--text-white)', marginBottom: '12px' }}>Svitna</p>
-                <p style={{ fontWeight: 700, fontSize: '25px', color: 'var(--text-white)' }}>78%</p>
-              </div>
-              <div style={{
-                backgroundColor: 'var(--bg-secondary)', border: '1px solid var(--accent-blue-bright)',
-                borderRadius: 'var(--radius-xl)', padding: '16px', display: 'flex', flexDirection: 'column', gap: '8px',
-              }}>
-                {['New Request','Extract Data','Review & Approve','Update System','Notify Team'].map((s) => (
-                  <div key={s} style={{
-                    backgroundColor: 'var(--bg-primary)', border: '1px solid var(--border)',
-                    borderRadius: 'var(--radius-sm)', padding: '6px 10px',
-                  }}>
-                    <p style={{ fontSize: '11px', color: 'var(--text-muted)' }}>{s}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
+            <p className="mt-4 text-sm text-ink-faint">
+              Every project starts as a tangle. This is what untangling looks like.
+            </p>
+          </Reveal>
         </section>
 
-        {/* Trust Strip */}
-        <section style={{ maxWidth: '1440px', margin: '0 auto', padding: '64px 48px 0' }}>
-          <p style={{ fontWeight: 600, fontSize: '12px', color: 'var(--text-muted)', letterSpacing: '0.08em', marginBottom: '24px' }}>
-            TRUSTED BY TEAMS AND FOUNDERS
+        {/* Stats - flat row, no cards */}
+        <section className="mx-auto max-w-[1400px] px-6 pb-24 md:px-12">
+          <RevealGroup className="grid grid-cols-2 gap-x-6 gap-y-10 border-t border-line pt-10 md:grid-cols-4">
+            {stats.map((s) => (
+              <RevealItem key={s.label} className="border-l border-line pl-5">
+                <p className="font-mono text-2xl text-ink md:text-3xl">{s.value}</p>
+                <p className="mt-2 text-sm text-ink-dim">{s.label}</p>
+              </RevealItem>
+            ))}
+          </RevealGroup>
+        </section>
+
+        {/* Capabilities bento */}
+        <section className="mx-auto max-w-[1400px] px-6 pb-24 md:px-12">
+          <p className="text-sm font-semibold tracking-[0.08em] text-signal-bright">
+            WHAT GETS FIXED
           </p>
-          <div style={{ display: 'flex', gap: '48px', flexWrap: 'wrap', marginBottom: '48px' }}>
-            {['◉  Startups','◉  Small Teams','◉  Growing Businesses','◉  Security Leaders'].map((item) => (
-              <p key={item} style={{ fontWeight: 400, fontSize: '15px', color: 'var(--text-white)' }}>{item}</p>
-            ))}
+          <h2 className="mt-4 max-w-[28ch] text-3xl font-medium tracking-tight text-ink md:text-4xl">
+            I don&apos;t build everything. I build what wastes your time the most.
+          </h2>
+
+          <RevealGroup className="mt-10 grid grid-cols-1 gap-4 md:grid-cols-3">
+            {capabilities.map((cap) => {
+              const Icon = cap.icon
+              return (
+                <RevealItem
+                  key={cap.title}
+                  className={`relative overflow-hidden rounded-card border border-line bg-raised p-7 ${cap.span ?? ''} ${
+                    cap.flag ? 'border-t-2 border-t-flag' : ''
+                  }`}
+                >
+                  {cap.tint && <div className={`absolute inset-0 ${cap.tint}`} />}
+                  <div className="relative">
+                    <Icon size={28} className="text-signal-bright" weight="duotone" />
+                    <p className="mt-5 text-lg font-medium text-ink">{cap.title}</p>
+                    <p className="mt-2 max-w-[36ch] text-sm leading-relaxed text-ink-dim">{cap.body}</p>
+                  </div>
+                </RevealItem>
+              )
+            })}
+          </RevealGroup>
+        </section>
+
+        {/* Manifesto */}
+        <section className="border-y border-line bg-surface px-6 py-28 md:px-12">
+          <div className="mx-auto max-w-[1400px]">
+            <RevealGroup className="text-4xl font-medium leading-[1.15] tracking-tight text-ink md:text-6xl" stagger={0.12}>
+              <RevealItem>If it takes fourteen clicks</RevealItem>
+              <RevealItem>to get to a solution,</RevealItem>
+              <RevealItem>that&apos;s not you.</RevealItem>
+              <RevealItem className="text-signal-bright">That&apos;s the system.</RevealItem>
+            </RevealGroup>
+            <Reveal delay={0.3} className="mt-8">
+              <p className="text-lg text-ink-dim">I fix the system.</p>
+            </Reveal>
           </div>
         </section>
 
-        {/* Bottom Metrics */}
-        <section style={{ maxWidth: '1440px', margin: '0 auto', padding: '0 48px 80px' }}>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: '16px' }}>
-            {[
-              { top: '20+', bottom: 'Projects Built' },
-              { top: '8+', bottom: 'Years in Tech' },
-              { top: 'Security + AI', bottom: 'Background' },
-              { top: 'Thousands', bottom: 'of Hours Building' },
-            ].map((m) => (
-              <div key={m.top} style={{
-                backgroundColor: 'var(--bg-secondary)', border: '1px solid var(--border)',
-                borderRadius: 'var(--radius-lg)', padding: '24px 32px',
-              }}>
-                <p style={{ fontWeight: 600, fontSize: '20px', color: 'var(--text-white)', lineHeight: 1.3 }}>
-                  {m.top}<br /><span style={{ fontSize: '16px' }}>{m.bottom}</span>
-                </p>
-              </div>
-            ))}
+        {/* Process - horizontal pan */}
+        <section className="mx-auto max-w-[1400px] px-6 pt-24 md:px-12">
+          <h2 className="max-w-[26ch] text-3xl font-medium tracking-tight text-ink md:text-4xl">
+            The same three moves, every time.
+          </h2>
+        </section>
+        <HorizontalProcess />
+
+        {/* Compliance authority block */}
+        <section className="border-y border-line bg-surface px-6 py-24 md:px-12">
+          <div className="mx-auto grid max-w-[1400px] grid-cols-1 items-center gap-10 md:grid-cols-[1fr_auto]">
+            <Reveal>
+              <h2 className="max-w-[32ch] text-3xl font-medium leading-tight tracking-tight text-ink md:text-4xl">
+                Built by someone who already thinks like an auditor.
+              </h2>
+              <p className="mt-5 max-w-[55ch] text-base leading-relaxed text-ink-dim">
+                Security work doesn&apos;t bolt onto a system after it&apos;s built. It&apos;s
+                part of how I build, every time, whether you asked for it or not.
+              </p>
+            </Reveal>
+            <Reveal delay={0.1}>
+              <ShieldCheck size={96} weight="thin" className="text-line-bright" />
+            </Reveal>
           </div>
+        </section>
+
+        {/* Final CTA */}
+        <section className="px-6 py-32 text-center md:px-12">
+          <Reveal>
+            <h2 className="mx-auto max-w-[24ch] text-3xl font-medium tracking-tight text-ink md:text-5xl">
+              Come learn something. Leave with it solved.
+            </h2>
+            <Link
+              href="/faq#contact"
+              className="mt-9 inline-flex h-14 items-center gap-2 rounded-pill bg-signal px-8 text-sm font-semibold text-ink transition-colors hover:bg-signal-bright"
+            >
+              Book a Call <ArrowRight size={16} weight="bold" />
+            </Link>
+          </Reveal>
         </section>
       </main>
     </>

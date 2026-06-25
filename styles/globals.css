@@ -1,153 +1,79 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+@theme {
+  /* surfaces — cold, off-black, never pure #000 */
+  --color-void: #07080a;
+  --color-surface: #0b0d11;
+  --color-raised: #11141a;
+  --color-elevated: #161a22;
+
+  /* steel borders */
+  --color-line: #1f2530;
+  --color-line-bright: #2b3344;
+
+  /* text */
+  --color-ink: #f3f5f8;
+  --color-ink-dim: #8d96a5;
+  --color-ink-faint: #565d6b;
+
+  /* one locked accent: signal blue */
+  --color-signal: #3169f0;
+  --color-signal-bright: #5c8cff;
+  --color-signal-dim: rgba(49, 105, 240, 0.14);
+
+  /* sparing second accent: amber, used for live/alert moments only */
+  --color-flag: #e8a23c;
+
+  --font-sans: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+
+  --radius-card: 1.25rem;
+  --radius-input: 0.625rem;
+  --radius-pill: 999px;
 }
 
-:root {
-  --bg-primary: #030408;
-  --bg-secondary: #090b12;
-  --bg-card: #0e121b;
-  --border: #1f2e4d;
-  --accent-blue: #2e85ff;
-  --accent-blue-bright: #0f61ff;
-  --text-white: #ffffff;
-  --text-muted: #9eadc7;
-  --text-danger: #ff2e2e;
-  --radius-sm: 5px;
-  --radius-md: 8px;
-  --radius-lg: 12px;
-  --radius-xl: 16px;
-  --radius-2xl: 18px;
+@layer base {
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    color-scheme: dark;
+  }
+
+  body {
+    background-color: var(--color-void);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+  button {
+    cursor: pointer;
+    font-family: inherit;
+  }
+
+  ::selection {
+    background: var(--color-signal-dim);
+    color: var(--color-ink);
+  }
 }
 
-html { scroll-behavior: smooth; }
-
-body {
-  background-color: var(--bg-primary);
-  color: var(--text-white);
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  min-height: 100vh;
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
 }
-
-a { color: inherit; text-decoration: none; }
-button { cursor: pointer; font-family: inherit; }
-
-/* Hover utilities — CSS-only, no JS event handlers needed */
-.btn-primary {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  height: 54px;
-  padding: 0 28px;
-  background-color: var(--accent-blue-bright);
-  border: 1px solid var(--accent-blue-bright);
-  border-radius: var(--radius-md);
-  font-weight: 600;
-  font-size: 15px;
-  color: var(--text-white);
-  transition: opacity 0.2s;
-}
-.btn-primary:hover { opacity: 0.88; }
-
-.btn-secondary {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  height: 54px;
-  padding: 0 28px;
-  background-color: var(--bg-primary);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  font-weight: 600;
-  font-size: 15px;
-  color: var(--text-white);
-  transition: border-color 0.2s, background-color 0.2s;
-}
-.btn-secondary:hover {
-  border-color: var(--accent-blue);
-  background-color: rgba(46,133,255,0.08);
-}
-
-.btn-outline {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  height: 48px;
-  padding: 0 20px;
-  background-color: var(--bg-primary);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  font-weight: 600;
-  font-size: 15px;
-  color: var(--text-white);
-  white-space: nowrap;
-  transition: border-color 0.2s, background-color 0.2s;
-}
-.btn-outline:hover {
-  border-color: var(--accent-blue);
-  background-color: rgba(46,133,255,0.08);
-}
-
-.btn-cta {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  height: 52px;
-  padding: 0 32px;
-  background-color: var(--accent-blue-bright);
-  border: 1px solid var(--accent-blue-bright);
-  border-radius: var(--radius-md);
-  font-weight: 600;
-  font-size: 15px;
-  color: var(--text-white);
-  transition: opacity 0.2s;
-}
-.btn-cta:hover { opacity: 0.88; }
-
-.btn-view-all {
-  height: 52px;
-  padding: 0 40px;
-  background-color: var(--bg-primary);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  font-weight: 600;
-  font-size: 15px;
-  color: var(--text-white);
-  transition: border-color 0.2s;
-}
-.btn-view-all:hover { border-color: var(--accent-blue); }
-
-/* Nav link hover */
-.nav-link { transition: color 0.2s; }
-.nav-link:hover { color: var(--accent-blue) !important; }
-
-/* Service card hover */
-.service-card {
-  transition: border-color 0.2s;
-}
-.service-card:hover { border-color: var(--accent-blue) !important; }
-
-/* Blog card hover */
-.blog-card {
-  transition: border-color 0.2s, transform 0.2s;
-  text-decoration: none;
-}
-.blog-card:hover {
-  border-color: var(--accent-blue) !important;
-  transform: translateY(-2px);
-}
-
-/* FAQ row hover */
-.faq-btn { transition: border-color 0.2s; }
-.faq-btn:hover { border-color: var(--accent-blue) !important; }
-
-/* Filter button */
-.filter-btn { transition: background-color 0.2s, border-color 0.2s; }
-.filter-btn:hover:not(.filter-active) { border-color: var(--accent-blue) !important; }
-
-/* Search input focus */
-.search-input:focus { border-color: var(--accent-blue) !important; outline: none; }
