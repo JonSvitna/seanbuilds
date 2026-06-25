@@ -77,8 +77,10 @@ export function HorizontalProcess() {
 function StepCard({ step }: { step: (typeof STEPS)[number] }) {
   return (
     <div className="border-l border-line pl-6 md:pl-8">
-      <p className="font-mono text-sm text-ink-faint">{step.n}</p>
-      <h3 className="mt-4 text-3xl font-medium tracking-tight text-ink md:text-4xl">{step.title}</h3>
+      <span className="flex h-9 w-9 items-center justify-center rounded-full border border-line-bright font-mono text-xs text-ink-dim">
+        {step.n}
+      </span>
+      <h3 className="mt-5 text-3xl font-medium tracking-tight text-ink md:text-4xl">{step.title}</h3>
       <p className="mt-5 max-w-[40ch] text-base leading-relaxed text-ink-dim">{step.body}</p>
     </div>
   )

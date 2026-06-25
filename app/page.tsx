@@ -19,24 +19,51 @@ const capabilities = [
     body: 'Approvals, reporting, and manual handoffs that run themselves.',
     span: 'md:col-span-2',
     tint: 'bg-gradient-to-br from-signal-dim to-transparent',
+    radius: 'rounded-[3rem_1.5rem_3rem_1.5rem]',
   },
   {
     icon: Wrench,
     title: 'Custom Tools',
     body: 'Internal software built around how your team actually works.',
+    radius: 'rounded-[1.5rem_3rem_1.5rem_3rem]',
   },
   {
     icon: Brain,
     title: 'AI, Used Right',
     body: "Applied where it earns its place. Not because it's trendy.",
+    radius: 'rounded-[3rem_3rem_1.5rem_3rem]',
   },
   {
     icon: ShieldCheck,
     title: 'Compliance & Security',
     body: 'CMMC-grade thinking applied to your systems, not just your paperwork.',
     flag: true,
+    radius: 'rounded-[1.5rem_3rem_3rem_3rem]',
   },
 ]
+
+function GraphCallout({
+  label,
+  corner,
+}: {
+  label: string
+  corner: 'tl' | 'tr' | 'bl' | 'br'
+}) {
+  const pos = {
+    tl: 'left-6 top-6 items-start text-left',
+    tr: 'right-6 top-6 items-end text-right',
+    bl: 'left-6 bottom-6 items-start text-left',
+    br: 'right-6 bottom-6 items-end text-right',
+  }[corner]
+  return (
+    <div className={`absolute flex flex-col gap-2 ${pos}`}>
+      <span className="h-1.5 w-1.5 rounded-full bg-signal-bright" />
+      <span className="font-mono text-[11px] uppercase tracking-[0.12em] text-ink-dim">
+        {label}
+      </span>
+    </div>
+  )
+}
 
 export default function HomePage() {
   return (
@@ -49,7 +76,7 @@ export default function HomePage() {
             <p className="text-sm font-semibold tracking-[0.08em] text-signal-bright">
               SYSTEMS FOR SMALL TEAMS
             </p>
-            <h1 className="mt-6 text-5xl font-medium leading-[1.05] tracking-tight text-ink md:text-6xl">
+            <h1 className="mt-6 text-4xl font-medium leading-[1.05] tracking-tight text-ink sm:text-5xl md:text-7xl md:leading-[1.02]">
               Stop clicking.
               <br />
               Start shipping.
@@ -75,8 +102,15 @@ export default function HomePage() {
           </div>
 
           <Reveal delay={0.1}>
-            <div className="h-[360px] overflow-hidden rounded-card border border-line bg-raised md:h-[440px]">
-              <SignalGraph />
+            <div className="relative">
+              <div className="absolute -inset-12 -z-10 rounded-full bg-signal/15 blur-[100px]" />
+              <div className="relative h-[380px] overflow-hidden rounded-card border border-line bg-raised md:h-[460px]">
+                <SignalGraph />
+                <GraphCallout label="Automation" corner="tl" />
+                <GraphCallout label="AI" corner="tr" />
+                <GraphCallout label="Tools" corner="bl" />
+                <GraphCallout label="Compliance" corner="br" />
+              </div>
             </div>
             <p className="mt-4 text-sm text-ink-faint">
               Every project starts as a tangle. This is what untangling looks like.
@@ -111,15 +145,15 @@ export default function HomePage() {
               return (
                 <RevealItem
                   key={cap.title}
-                  className={`relative overflow-hidden rounded-card border border-line bg-raised p-7 ${cap.span ?? ''} ${
+                  className={`relative overflow-hidden border border-line bg-raised p-9 ${cap.radius} ${cap.span ?? ''} ${
                     cap.flag ? 'border-t-2 border-t-flag' : ''
                   }`}
                 >
                   {cap.tint && <div className={`absolute inset-0 ${cap.tint}`} />}
                   <div className="relative">
-                    <Icon size={28} className="text-signal-bright" weight="duotone" />
-                    <p className="mt-5 text-lg font-medium text-ink">{cap.title}</p>
-                    <p className="mt-2 max-w-[36ch] text-sm leading-relaxed text-ink-dim">{cap.body}</p>
+                    <Icon size={26} className="text-signal-bright" weight="duotone" />
+                    <p className="mt-6 text-2xl font-semibold tracking-tight text-ink">{cap.title}</p>
+                    <p className="mt-3 max-w-[36ch] text-sm leading-relaxed text-ink-dim">{cap.body}</p>
                   </div>
                 </RevealItem>
               )
@@ -163,7 +197,10 @@ export default function HomePage() {
               </p>
             </Reveal>
             <Reveal delay={0.1}>
-              <ShieldCheck size={96} weight="thin" className="text-line-bright" />
+              <div className="relative flex items-center justify-center">
+                <div className="absolute h-32 w-32 rounded-full bg-flag/10 blur-[60px]" />
+                <ShieldCheck size={96} weight="thin" className="relative text-line-bright" />
+              </div>
             </Reveal>
           </div>
         </section>
