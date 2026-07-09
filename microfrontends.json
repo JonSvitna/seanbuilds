@@ -6,7 +6,7 @@
         "fallback": "https://project-m5oj4.vercel.app"
       }
     },
-    "smb-outreach-dashboard": {
+    "contract-hunter": {
       "routing": [
         {
           "paths": ["/outreach", "/outreach/:path*"]
