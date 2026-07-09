@@ -4,3 +4,5 @@ dist/
 .env.local
 seanbuilds-site/
 .next/
+.vercel
+.env*

@@ -1,0 +1,17 @@
+{
+  "$schema": "https://openapi.vercel.sh/microfrontends.json",
+  "applications": {
+    "seanbuilds": {
+      "development": {
+        "fallback": "https://project-m5oj4.vercel.app"
+      }
+    },
+    "smb-outreach-dashboard": {
+      "routing": [
+        {
+          "paths": ["/outreach", "/outreach/:path*"]
+        }
+      ]
+    }
+  }
+}
